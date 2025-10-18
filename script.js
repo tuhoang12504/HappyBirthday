@@ -1,4 +1,6 @@
 import {nameWebsite , password , letterText , wishRandomText , mainWishText , messengerLink} from './CONFIG.js';
+window.alert(`${innerWidth}x${innerHeight}`)
+
 document.title = nameWebsite;
 // Scene 1: Password ---------------------------------------------------
 let enteredPassword = '';
@@ -310,3 +312,4 @@ candles.forEach((candle, index) => {
 happyBirthday.addEventListener('click', () => {
     window.location = messengerLink;
 })
+
