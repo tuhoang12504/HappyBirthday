@@ -275,7 +275,7 @@ body {
     display: grid;
     font-weight: 500;
     font-style: italic;
-    font-size: 24px;
+    font-size: 17px;
     position: absolute;
     top: 10px;
     left: 30px;
@@ -308,6 +308,7 @@ body {
     }
 }
 .thu p {
+    margin: 3px 5px;
     text-align: left;
     color: #206d76;
     z-index: 2;
@@ -400,11 +401,11 @@ body {
 }
 
 .wish-text:nth-child(2) {
-    animation-delay: 2.5s;
+    animation-delay: 2s;
 }
 
 .wish-text:nth-child(3) {
-    animation-delay: 4.5s;
+    animation-delay: 3.5s;
 }
 
 @keyframes wishFloat {
@@ -578,5 +579,3 @@ body {
     transform: translateY(-35vh);
     opacity: 1;
 }
-
-
