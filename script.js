@@ -1,6 +1,6 @@
 import {nameWebsite , password , letterText , wishRandomText , mainWishText , messengerLink} from './CONFIG.js';
 document.title = nameWebsite;
-// window.alert(`Kích thước màn hình: ${innerWidth}x${innerHeight}`)
+window.alert(`Kích thước màn hình: ${innerWidth}x${innerHeight}`)
 // Scene 1: Password ---------------------------------------------------
 let enteredPassword = '';
 var SceneActive = document.querySelector('.scene.active').id;
@@ -311,3 +311,4 @@ candles.forEach((candle, index) => {
 happyBirthday.addEventListener('click', () => {
     window.location = messengerLink;
 })
+
