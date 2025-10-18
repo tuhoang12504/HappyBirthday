@@ -288,7 +288,7 @@ animateWishes();
 
 const candles = document.querySelectorAll('.candle');
 const happyBirthday = document.querySelector('.happyBirthday');
-let numberOfBlownCandles = 3;
+let numberOfBlownCandles = 2;
 candles.forEach((candle, index) => {
     candle.addEventListener('click', () => {
         if (candle.classList.contains('blown')) {
@@ -311,4 +311,5 @@ candles.forEach((candle, index) => {
 happyBirthday.addEventListener('click', () => {
     window.location = messengerLink;
 })
+
 
