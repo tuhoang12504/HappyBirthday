@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Chúc Mừng Sinh Nhật 🎉</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Scene 1: Password -->
+    <div class="scene password-scene active" id="scene1">
+        <div class="password-box">
+            <div class="lock-icon">🎂</div>
+            <h2>Nhập mật khẩu</h2>
+            <p>Gợi ý: Không có gợi ý đâu</p>
+            
+            <div class="password-display" id="passwordDisplay"></div>
+            
+            <div class="keypad">
+                <button class="key" onclick="pressKey('1')">1</button>
+                <button class="key" onclick="pressKey('2')">2</button>
+                <button class="key" onclick="pressKey('3')">3</button>
+                <button class="key" onclick="pressKey('4')">4</button>
+                <button class="key" onclick="pressKey('5')">5</button>
+                <button class="key" onclick="pressKey('6')">6</button>
+                <button class="key" onclick="pressKey('7')">7</button>
+                <button class="key" onclick="pressKey('8')">8</button>
+                <button class="key" onclick="pressKey('9')">9</button>
+                <button class="key delete" onclick="deleteKey()">←</button>
+                <button class="key" onclick="pressKey('0')">0</button>
+                <button class="key confirm" onclick="checkPassword()">✓</button>
+            </div>
+            <div class="error-msg" id="errorMsg">🎈 Sai mật khẩu! Thử lại nhé 💕</div>
+        </div>
+    </div>
+
+    <!-- Scene 2: Letter -->
+    <div class="scene letter-scene" id="scene2">
+        <div class="letter-container">
+            <div class="phongBi">
+                <div class="thu">
+                    <button class="card-nav" onclick="nextScene()">→</button>
+                </div>
+                <div class="nap"></div>
+                <div class="phai"></div>
+                <div class="trai"></div>
+                <div class="duoi"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scene 3: Celebration -->
+    <div class="scene celebration-scene" id="scene3">
+        <!-- Canvas để vẽ pháo hoa -->
+        <canvas id="fireworksCanvas"></canvas>
+        
+        <div class="celebration-content">
+            <div class="wishes-container"></div>
+            <div class="wish-random"></div>
+        </div>
+
+        <!-- Bánh sinh nhật nổi lên -->
+        <div class="cake-container" id="cakeContainer">
+            <div class="birthday-cake-display" id="birthdayCake">
+                🎂
+                <div class="candle" style="left: 35px;">
+                    <div class="candle-flame">🔥</div>
+                </div>
+                <div class="candle" style="left: 64px;">
+                    <div class="candle-flame">🔥</div>
+                </div>
+                <div class="candle" style="left: 90px;">
+                    <div class="candle-flame">🔥</div>
+                </div>
+            </div>
+            <p>Thổi nến đi</p>
+        </div>
+        <div class="happyBirthday">Happy Birthday</div>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

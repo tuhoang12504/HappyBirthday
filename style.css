@@ -1,0 +1,572 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    background: linear-gradient(135deg, #fff0f7 0%, #ffe4f0 100%);
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Scene 1: Password -----------------------------------------------------------*/
+.scene {
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    animation: fadeIn 0.8s ease-in;
+}
+
+.scene.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Password Scene */
+.password-scene {
+    background: linear-gradient(135deg, #ffc0e3 0%, #ffb3d9 100%);
+}
+
+.lock-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.password-box {
+    background: white;
+    padding: 25px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 300px;
+    width: 90%;
+}
+
+.password-box h2 {
+    color: #d91e63;
+    margin-bottom: 8px;
+    font-size: 22px;
+}
+
+.password-box p {
+    color: #999;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+.password-display {
+    width: 100%;
+    max-width: 200px;
+    padding: 12px;
+    border: 2px solid #ffb3d9;
+    border-radius: 10px;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 6px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d91e63;
+    font-weight: bold;
+    background: #fff9fc;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.password-display span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: #d91e63;
+    border-radius: 50%;
+    margin: 0 3px;
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+    width: 260px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.key {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ffe4f0, #ffb3d9);
+    color: #d91e63;
+    transition: all 0.2s;
+    box-shadow: 0 4px 10px rgba(217, 30, 99, 0.1);
+    min-height: 50px;
+}
+
+.key:active {
+    transform: scale(0.9);
+    box-shadow: 0 2px 5px rgba(217, 30, 99, 0.2);
+}
+
+.key:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(217, 30, 99, 0.2);
+}
+
+.key.delete {
+    background: linear-gradient(135deg, #ffb3d9, #ff69b4);
+    color: white;
+}
+
+.key.confirm {
+    background: linear-gradient(135deg, #d91e63, #ff69b4);
+    color: white;
+}
+
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #d91e63, #ff69b4);
+    color: white;
+    width: 200px;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.error-msg {
+    color: #d91e63;
+    font-size: 13px;
+    margin-top: 12px;
+    display: none;
+    font-weight: bold;
+}
+
+.floating-balloon {
+    position: fixed;
+    pointer-events: none;
+    font-size: 40px;
+    animation: balloonFloat 4s ease-in forwards;
+}
+
+@keyframes balloonFloat {
+    0% {
+        opacity: 1;
+        transform: translateY(0) translateX(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-500px) translateX(20px) scale(0.8);
+    }
+}
+
+/*Scene 2: Letter Scene ---------------------------------------------------*/
+.letter-scene {
+    background: linear-gradient(135deg, #fff5fb 0%, #ffe4f0 100%);
+}
+.letter-container {
+    perspective: 1200px;
+    margin: 20px auto;
+    position: relative;
+    width: 300px;
+    height: 220px;
+    background-color: #ffe5ad;
+    border-radius: 9px;
+}
+.phongBi {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.nap {
+    position: absolute;
+    top: 0;
+    left: 6px;
+    width: 288px;
+    height: 50%;
+    clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+    background-color: #ffb14b;
+    transform-origin: top center;
+    cursor: pointer;
+    transition: transform 0.6s ease;
+    z-index: 2;
+}
+.nap.open {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+.duoi {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 55%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+    background-color:#ffb14b;
+    z-index: 3;
+}
+.trai {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 50%;
+    height: 220px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+    background-color: #ffd98a;
+    z-index: 3;
+}
+.phai {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 220px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    clip-path: polygon(100% 0%, 0% 50%, 100% 100%);
+    background-color:#ffd98a;
+    z-index: 3;
+}
+.thu {
+    font-family: "Dancing Script", cursive;
+    display: grid;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 24px;
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    background-color: #dff8f6;
+    width: 240px;
+    height: 200px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    z-index: 1;
+    border-radius: 3px;
+}
+.thu.open {
+    transform: translateY(-30px);
+    opacity: 1;
+    z-index: 2;
+}
+.background .thu.open {
+    position: relative;
+    top: 0;
+    left: 0;
+    animation: zoomIN 0.6s ease forwards;
+}
+@keyframes zoomIN {
+    0% {
+        scale: 1;
+    }
+    100% {
+        scale: 1.5;
+    }
+}
+.thu p {
+    text-align: center;
+    color: #206d76;
+    z-index: 2;
+}
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+.card-nav {
+    position: relative;
+    background: linear-gradient(135deg, #d91e63, #ff69b4);
+    bottom: 0;
+    color: white;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 0 auto;
+    transition: transform 0.2s;
+    z-index: 15;
+}
+.card-nav:active {
+    transform: scale(0.9);
+}
+
+/* Scene 3: Celebration Scene ---------------------------------------------*/
+.celebration-scene {
+    background: linear-gradient(135deg, #1a0033 0%, #330066 50%, #001a4d 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+#fireworksCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.celebration-content {
+    text-align: center;
+    z-index: 10;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.wishes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 90%;
+}
+
+.wish-text {
+    font-size: 18px;
+    color: white;
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.8), 0 0 40px rgba(255, 20, 147, 0.5);
+    font-weight: bold;
+    line-height: 1.6;
+}
+.wishes-container .wish-text {
+    opacity: 0;
+    animation: wishFloat 4s ease-out forwards;
+
+}
+
+.wish-text:nth-child(1) {
+    animation-delay: 0.5s;
+}
+
+.wish-text:nth-child(2) {
+    animation-delay: 1.5s;
+}
+
+.wish-text:nth-child(3) {
+    animation-delay: 2.5s;
+}
+
+@keyframes wishFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+}
+.wish-random {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.wish-random .wish-text {
+    position: absolute;
+}
+@keyframes randomWishMove {
+    0% {
+        bottom: -10%;
+    }
+    100% {
+        bottom: 110%;
+    }
+}
+
+
+.cake-container {
+    position: absolute;
+    bottom: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    animation: cakeRiseUp 5s ease-out forwards;
+    animation-delay: 5s;
+}
+.cake-container p {
+    color: white;
+    font-size: 18px;
+    margin: 10px auto;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.8), 0 0 20px rgba(255, 20, 147, 0.5);
+    font-weight: bold;
+    z-index: 20;
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+.cake-container .hide {
+    opacity: 0;
+}
+@keyframes cakeRiseUp {
+    from {
+        bottom: -200px;
+        opacity: 0;
+    }
+    to {
+        bottom: 40vh;
+        opacity: 1;
+    }
+}
+
+.birthday-cake-display {
+    font-size: 120px;
+    position: relative;
+    filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.6));
+}
+
+.candle {
+    position: absolute;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 9px;
+}
+
+.candle:hover {
+    transform: scale(1.1);
+}
+
+.candle-flame {
+    font-size: 30px;
+    animation: candleFlicker 0.6s ease-in-out infinite;
+    display: inline-block;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.candle.blown .candle-flame {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes candleFlicker {
+    0%, 100% { 
+        transform: scaleY(1) scaleX(1);
+        opacity: 1;
+    }
+    50% { 
+        transform: scaleY(1.1) scaleX(0.95);
+        opacity: 0.9;
+    }
+}
+
+@media (max-width: 480px) {
+    .password-box {
+        padding: 20px;
+    }
+
+    .celebration-content h1 {
+        font-size: 36px;
+    }
+
+    .birthday-cake {
+        font-size: 60px;
+    }
+    .keypad { 
+        width: 200px; 
+    }
+    .wish-text { 
+        font-size: 16px; 
+    }
+}
+.happyBirthday {
+    position: absolute;
+    background: linear-gradient(135deg, #d91e63, #ff69b4);
+    border-radius: 30px;
+    padding: 15px 30px;
+    bottom: 0;
+    opacity: 0;
+    transform: translateY(0);
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.8), 0 0 20px rgba(255, 20, 147, 0.5);
+    transition: transform 5s cubic-bezier(0.22, 1, 0.36, 1), opacity 4s ease;
+    animation: happyBirthdayPulse 2s ease-in-out infinite;
+    z-index: 20;
+}
+@keyframes happyBirthdayPulse {
+    0%, 100% {
+        font-size: 24px;
+        text-shadow: 0 0 10px rgba(255, 105, 180, 0.8), 0 0 20px rgba(255, 20, 147, 0.5);
+    }
+    50% {
+        font-size: 27px;
+        text-shadow: 0 0 20px rgba(255, 105, 180, 1), 0 0 30px rgba(255, 20, 147, 0.7);
+    }
+}
+.happyBirthday.floating {
+    transform: translateY(-35vh);
+    opacity: 1;
+}
