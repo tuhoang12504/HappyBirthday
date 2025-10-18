@@ -476,11 +476,19 @@ body {
 }
 
 .birthday-cake-display {
-    font-size: 120px;
     position: relative;
     filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.6));
 }
-
+.cake-img {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+.cake-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 .candle {
     position: absolute;
     cursor: pointer;
@@ -490,7 +498,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 9px;
+    top: -6px;
 }
 
 .candle:hover {
