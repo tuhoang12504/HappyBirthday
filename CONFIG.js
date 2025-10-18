@@ -31,5 +31,4 @@ const mainWishText = {
 }
 const messengerLink = 'https://m.me/tuhoang12504'
 
-
-export {password , letterText , wishRandomText , mainWishText , messengerLink};
+export {nameWebsite , password , letterText , wishRandomText , mainWishText , messengerLink};
