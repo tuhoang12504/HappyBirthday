@@ -1,3 +1,4 @@
+const nameWebsite = '🎉 Chúc Mừng Sinh Nhật 🎉'
 const password = '1810'
 const letterText = {
     line1: 'Chúc mừng sinh nhật',
@@ -29,5 +30,6 @@ const mainWishText = {
     // Giới hạn 3 dòng thôi
 }
 const messengerLink = 'https://m.me/tuhoang12504'
+
 
 export {password , letterText , wishRandomText , mainWishText , messengerLink};
