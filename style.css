@@ -308,7 +308,7 @@ body {
     }
 }
 .thu p {
-    text-align: center;
+    text-align: left;
     color: #206d76;
     z-index: 2;
 }
@@ -578,4 +578,5 @@ body {
     transform: translateY(-35vh);
     opacity: 1;
 }
+
 
