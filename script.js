@@ -1,4 +1,5 @@
-import {password , letterText , wishRandomText , mainWishText , messengerLink} from './CONFIG.js';
+import {nameWebsite , password , letterText , wishRandomText , mainWishText , messengerLink} from './CONFIG.js';
+document.title = nameWebsite;
 // Scene 1: Password ---------------------------------------------------
 let enteredPassword = '';
 var SceneActive = document.querySelector('.scene.active').id;
