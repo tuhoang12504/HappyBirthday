@@ -3,13 +3,12 @@ document.title = nameWebsite;
 // window.alert(`Kích thước màn hình: ${innerWidth}x${innerHeight}`)
 // Scene 1: Password ---------------------------------------------------
 let enteredPassword = '';
-var SceneActive = document.querySelector('.scene.active').id;
 
 function pressKey(num) {
     if (enteredPassword.length < 4) {
         enteredPassword += num;
         updateDisplay();
-        createBalloon();
+        createBalloon(num);
     }
 }
 window.pressKey = pressKey;
@@ -30,15 +29,14 @@ function updateDisplay() {
     }
 }
 
-function createBalloon() {
+function createBalloon(num) {
     const balloon = document.createElement('div');
     balloon.className = 'floating-balloon';
     balloon.textContent = ['🎈', '🎉', '💕', '✨', '🎊'][Math.floor(Math.random() * 5)];
     
-    const rect = document.querySelector('.password-box').getBoundingClientRect();
-    balloon.style.left = (rect.left + rect.width / 2) + 'px';
-    balloon.style.top = (rect.top + rect.height / 2) + 'px';
-    balloon.style.transform = `translateX(${(Math.random() - 0.5) * 100}px)`;
+    const rect = document.querySelector(`.keypad .key${num}`).getBoundingClientRect();
+    balloon.style.left = (rect.left + rect.width / 2 - 20) + 'px';
+    balloon.style.top = (rect.top + rect.height / 2 - 20) + 'px';
     
     document.body.appendChild(balloon);
     setTimeout(() => balloon.remove(), 4000);
@@ -60,36 +58,50 @@ window.checkPassword = checkPassword;
 
 function nextScene() {
     const scenes = document.querySelectorAll('.scene');
-    const currentActive = document.querySelector('.scene.active');
-    const nextIndex = Array.from(scenes).indexOf(currentActive) + 1;
-    const background = document.querySelector('.background')
-    if (background) {
-        background.style.display = 'none'
-    }
-    currentActive.classList.remove('active');
+    const current = document.querySelector('.scene.active');
+    const nextIndex = Array.from(scenes).indexOf(current) + 1;
+
+    if (current) current.classList.remove('active');
+
     if (nextIndex < scenes.length) {
-        scenes[nextIndex].classList.add('active');
+        const next = scenes[nextIndex];
+        next.classList.add('active');
+
+        if (next.id === 'scene2') autoResize();
+        if (next.id === 'scene3') animateWishes();
     }
-    SceneActive = document.querySelector('.scene.active').id;
+
+    document.querySelector('.background')?.remove();
 }
+
 window.nextScene = nextScene;
 
 // Scene 2 -----------------------------------------------------------
-const scene2 = document.getElementById('scene2')
 const napPhongBi = document.querySelector('.nap') 
 const thu = document.querySelector('.thu')
-const button = thu.querySelector('.card-nav')
+const thuContent = document.querySelector('.thu-content')
 for (let i = 0; i < 3; i++) {
-    console.log(letterText[`line${i+1}`]);
     const para = document.createElement('p')
     para.textContent = letterText[`line${i+1}`]
-    thu.insertBefore(para, button)
+    thuContent.appendChild(para)
 }
 
 napPhongBi.addEventListener('click', function() {
     this.classList.toggle('open')
     thu.classList.toggle('open')
 })
+function autoResize() {
+    const thuParagraphs = thuContent.querySelectorAll('p');
+    let fontSize = parseInt(window.getComputedStyle(thuParagraphs[0]).fontSize.match(/\d+/)[0]);
+    while (thuContent.scrollHeight > thuContent.clientHeight && fontSize > 10) {
+        fontSize--;
+        thuParagraphs.forEach((paragraph) => {
+            paragraph.style.fontSize = fontSize.toString() + 'px'
+        })
+    }
+}
+
+
 let isLetterClick = false
 thu.addEventListener('click', function() {
     if (!isLetterClick) {
@@ -187,12 +199,12 @@ function createExplosion(x, y, color, type) {
     const count = 60 + Math.random() * 40;
 
     if (type === "heart") {
-    // 💖 Pháo hình trái tim (đầu nhọn hướng xuống)
+    // 💖 Pháo hình trái tim
     for (let i = 0; i < count; i++) {
         const angle = (Math.PI * 2 * i) / count;
         const r = 10 * (1 - Math.sin(angle)) * 8;
         const vx = Math.cos(angle) * (r / 25);
-        const vy = -Math.sin(angle) * (r / 25); // 🔁 Đảo dấu để đầu nhọn hướng xuống
+        const vy = -Math.sin(angle) * (r / 25);
         particles.push(new Particle(x, y, color, vx, vy, type));
     }
     } 
@@ -261,12 +273,7 @@ for (let i = 0; i < 3; i++) {
 // Wish random
 const wishRandom = document.querySelector('.wish-random')
 const windowWidth = window.innerWidth
-console.log(windowWidth);
 function animateWishes() {
-    if (SceneActive !== 'scene3') {
-        setTimeout(animateWishes, 1500);
-        return;
-    }
     const randomText = document.createElement('div');
     randomText.classList.add('wish-text');
     wishRandom.appendChild(randomText);
@@ -275,7 +282,6 @@ function animateWishes() {
     
     randomText.style.animation = 'randomWishMove 6s linear forwards';
     const left =  Math.random() * (windowWidth - 200) + 100;
-    console.log(left);
     randomText.style.left = left + 'px';
     setTimeout(animateWishes, 1500);
     randomText.addEventListener('animationend', () => {
@@ -284,7 +290,6 @@ function animateWishes() {
         }
     });
 }
-animateWishes();
 
 const candles = document.querySelectorAll('.candle');
 const happyBirthday = document.querySelector('.happyBirthday');
@@ -311,6 +316,3 @@ candles.forEach((candle, index) => {
 happyBirthday.addEventListener('click', () => {
     window.location = messengerLink;
 })
-
-
-
